@@ -30,11 +30,15 @@ class ActivityLog(models.Model):
         return f"{self.user.username} - {self.activity_type}"
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    name = models.CharField(max_length=100, blank=True)  # ✅ ADD THIS
+
     current_weight = models.FloatField()
     target_weight = models.FloatField()
     height = models.FloatField()
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.user.username
+        return self.name or self.user.username
+
 
